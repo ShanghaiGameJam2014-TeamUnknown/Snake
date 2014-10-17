@@ -47,7 +47,7 @@ public class MapScript : MonoBehaviour {
 			unit.MapOffsetY = GameMaster.instance.GetMapOffsetY();
 			unit.UpdatePosition();
 			food.SetActive(true);
-
+			food.GetComponent<Animator>().SetTrigger("create");
 			FoodTiles.Add(food);
 		}
 
