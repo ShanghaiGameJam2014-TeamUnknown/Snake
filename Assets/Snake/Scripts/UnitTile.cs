@@ -52,4 +52,14 @@ public class UnitTile : MonoBehaviour {
 		MapPos.x +=1;
 		UpdatePosition();
 	}
+	
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		if(col.gameObject.tag == "Player")
+		{
+			Debug.Log("Player hit");
+
+			//col.gameObject.GetComponent();
+		}
+	}
 }
