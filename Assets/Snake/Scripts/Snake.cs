@@ -94,7 +94,10 @@ public class Snake : MonoBehaviour {
 			FramCount=0;
 		}
 
-		InputX();
+		if(!IsDead)
+		{
+			InputX();
+		}
 	}
 
 	void Die() {
