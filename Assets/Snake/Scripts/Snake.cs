@@ -93,7 +93,7 @@ public class Snake : MonoBehaviour {
 		Vector2 newPos = head.MapPos + pendingDirection;
 		
 		GameObject tile = GameMaster.instance.GetTile((int)newPos.x, (int)newPos.y);
-		if (tile.tag != "snake") {
+		if (tile==null || tile.tag != "snake") {
 			CurrentDirection = pendingDirection;
 		}
 	}

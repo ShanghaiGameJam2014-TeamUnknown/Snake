@@ -32,9 +32,13 @@ public class GameMaster : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		passedTime = 0;
+		passedTime = 3;
 		mapStatus = new int[MapSize,MapSize];
+
+		mapLogic = GameMap.GetComponent<MapScript>();
 		ClearMapStatus();
+
+		mapLogic.RandomFood(GetAvailableTileIndex());
 	}
 	
 	// Update is called once per frame
@@ -42,7 +46,7 @@ public class GameMaster : MonoBehaviour {
 		// generate foods
 		passedTime += Time.deltaTime;
 		if (passedTime > 2) {
-			//mapLogic.RandomFood(GetAvailableTileIndex());
+			mapLogic.RandomFood(GetAvailableTileIndex());
 			passedTime = 0;
 		}
 
