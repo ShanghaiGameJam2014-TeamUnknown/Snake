@@ -3,7 +3,8 @@ using System.Collections;
 
 public enum TileType
 {
-	TERRAIN,
+	EMPTY = 0,
+	SNAKE,
 	FOOD1,
 	FOOD2
 }

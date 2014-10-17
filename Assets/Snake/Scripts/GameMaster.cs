@@ -61,16 +61,23 @@ public class GameMaster : MonoBehaviour {
 	{
 		for(int i=0;i<MapSize;i++) {
 			for(int j=0; j<MapSize; j++) {
-				mapStatus[i,j] = 0;
+				mapStatus[i,j] = (int)TileType.EMPTY;
 			}
 		}
 	}
 
 	public List<Vector2> GetAvailableTileIndex()
 	{
+		ClearMapStatus();
+
 		// iterate snakeTiles, set mapStatus
 		List<GameObject> snakeTiles = PlayerSnake.GetComponent<Snake>().Body;
 
+		for(int i=0; i<snakeTiles.Count; i++)
+		{
+			TileScript tile = snakeTiles[i].GetComponent<TileScript>();
+			mapStatus[(int)tile.MapPos.x, (int)tile.MapPos.y] = (int)TileType.SNAKE;
+		}
 
 		List<Vector2> availableTileIndex = new List<Vector2>();
 		for (int i=0;i<MapSize;i++) {
