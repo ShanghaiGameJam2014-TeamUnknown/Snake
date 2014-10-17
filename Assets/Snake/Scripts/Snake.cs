@@ -76,6 +76,10 @@ public class Snake : MonoBehaviour {
 					newHead.SetActive(true);
 					toEat.SetActive(false);
 					AddHead(newHead);
+
+					//newHead.GetComponent<TileScript>().Anim = Body[FramCount-1]
+					UpdateSnakeAnimation(CurrentDirection, newHead);
+					UpdateSnakeAnimation(CurrentDirection, Body[Body.Count-2]);
 				}
 				else if (toEat!=null && toEat.tag == "snake") {
 					// Death;
@@ -88,20 +92,21 @@ public class Snake : MonoBehaviour {
 			}
 			FramCount=0;
 		}
+
+		InputX();
 	}
 
 	void Die() {
 		Debug.Log("Die!");
 	}
 
-	// Update is called once per frame
-	void Update() {
+	void InputX()
+	{
 		TileScript head = Body[Body.Count - 1].gameObject.GetComponent<TileScript>();
-
+		
 		Vector2 pendingDirection = CurrentDirection;
-
+		
 		if(Input.GetKey(KeyCode.A)) {
-			//PreviousDirection = CurrentDirection;
 			pendingDirection = Utilities.LEFT;
 		}
 		else if(Input.GetKey(KeyCode.D)) {	
@@ -117,14 +122,17 @@ public class Snake : MonoBehaviour {
 		
 		GameObject tile = GameMaster.instance.GetTile((int)newPos.x, (int)newPos.y);
 		if (tile==null || tile.tag != "snake") {
-
+			
 			if(CurrentDirection!=pendingDirection)
 			{
 				CurrentDirection = pendingDirection;
-				//UpdateSnakeAnimation(CurrentDirection, Body[Body.Count-1]);
-				Debug.Log("xx");
+
 			}
 		}
+	}
+	// Update is called once per frame
+	void Update() {
+
 	}
 
 	void UpdateSnakeAnimation(Vector2 direction, GameObject tile)
@@ -147,7 +155,11 @@ public class Snake : MonoBehaviour {
 			anim = "walk";
 		}
 
-		tile.GetComponent<Animator>().SetTrigger(anim);
+		if(tile.GetComponent<TileScript>().Anim !=anim)
+		{
+			tile.GetComponent<TileScript>().Anim = anim;
+			tile.GetComponent<Animator>().SetTrigger(anim);
+		}
 	}
 
 	void UpdateSnakePosition(Vector2 newHeadPosition)
@@ -162,7 +174,6 @@ public class Snake : MonoBehaviour {
 			UpdateSnakeAnimation(prePos - temp, Body[i]);
 			tile.UpdatePosition();
 
-			//Debug.Log("Here");
 			prePos = temp;
 		}
 	}
