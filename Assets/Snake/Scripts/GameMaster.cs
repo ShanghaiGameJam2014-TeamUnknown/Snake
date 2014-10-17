@@ -45,7 +45,7 @@ public class GameMaster : MonoBehaviour {
 	void FixedUpdate () {
 		// generate foods
 		passedTime += Time.deltaTime;
-		if (passedTime > 2) {
+		if (passedTime > 10) {
 			mapLogic.RandomFood(GetAvailableTileIndex());
 			passedTime = 0;
 		}

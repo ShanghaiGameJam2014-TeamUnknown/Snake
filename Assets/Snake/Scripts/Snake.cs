@@ -52,19 +52,54 @@ public class Snake : MonoBehaviour {
 		{
 			TileScript head = Body[Body.Count - 1].gameObject.GetComponent<TileScript>();
 			Vector2 newPos = head.MapPos + CurrentDirection;
+			if(newPos.x<0)
+			{
+				newPos.x = GameMaster.instance.MapSize-1;
+			}
+			else if(newPos.x>=GameMaster.instance.MapSize)
+			{
+				newPos.x = 0;
+			}
+
+			if(newPos.y<0)
+			{
+				newPos.y = GameMaster.instance.MapSize-1;
+			}
+			else if(newPos.y >=GameMaster.instance.MapSize)
+			{
+				newPos.y = 0;
+			}
 			//head.MapPos = newPos;
 			//head.UpdatePosition();
 
-			UpdateSnakePosition(newPos);
 			// Ask GM whether the newPos has food or is snake
 			GameObject toEat = GameMaster.instance.GetTile((int)newPos.x, (int)newPos.y);
-			if (toEat.tag == "food")
+
+			if (toEat!=null && toEat.tag == "food")
 			{
 				// Body.Add();
-				// AddHead();
+				GameObject newHead = Instantiate(toEat, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+				
+				newHead.tag = "snake";
+				TileScript unit = newHead.GetComponent<TileScript>();
+
+				unit.MapPos.x = (int)newPos.x;
+				unit.MapPos.y = (int)newPos.y;
+				unit.MapOffset = GameMaster.instance.GetMapOffset();
+				unit.UpdatePosition();
+				newHead.SetActive(true);
+				toEat.SetActive(false);
+				AddHead(newHead);
+
+				Debug.Log("Eat");
 			}
-			else if (toEat.tag == "snake") {
+			else if (toEat!=null && toEat.tag == "snake") {
 				// Death;
+				Debug.Log("Die!");
+			}
+			else
+			{
+				UpdateSnakePosition(newPos);
 			}
 			FramCount=0;
 		}
@@ -75,7 +110,7 @@ public class Snake : MonoBehaviour {
 	{
 		TileScript head = Body[Body.Count - 1].gameObject.GetComponent<TileScript>();
 
-		Vector2 pendingDirection = Vector2.zero;
+		Vector2 pendingDirection = CurrentDirection;
 
 		if(Input.GetKey(KeyCode.A)) {
 			//PreviousDirection = CurrentDirection;

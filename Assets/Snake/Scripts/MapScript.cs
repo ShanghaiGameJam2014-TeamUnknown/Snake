@@ -40,6 +40,7 @@ public class MapScript : MonoBehaviour {
 
 			GameObject food = Instantiate(FoodPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 
+			food.tag = "food";
 			TileScript unit = food.GetComponent<TileScript>();
 			unit.MapPos.x = randX;
 			unit.MapPos.y = randY;
