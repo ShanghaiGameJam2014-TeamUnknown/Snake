@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MapScript : MonoBehaviour {
 	
@@ -36,8 +37,15 @@ public class MapScript : MonoBehaviour {
 	}
 
 	public void RandomFood() {
-		int randX = Random.Range(0, MapSize-1);
-		int randY = Random.Range(0, MapSize-1);
+
+		List<Vector2> availableTiles = GameMaster.instance.GetAvailableTileIndex();
+		int randIndex = Random.Range(0, availableTiles.Count);
+		Vector2 randPos = availableTiles[randIndex];
+
+		
+		int randX = (int)randPos.x;
+		int randY = (int)randPos.y;
+
 		GameObject.Destroy(MapTiles[randX, randY]);
 		MapTiles[randX, randY] = Instantiate(FoodPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 		TileScript unit = MapTiles[randX, randY].GetComponent<TileScript>();
@@ -46,5 +54,9 @@ public class MapScript : MonoBehaviour {
 		unit.MapOffset = MapOffset;
 		unit.UpdatePosition();
 		MapTiles[randX, randY].SetActive(true);
+
+		GameMaster.instance.SetMapStatus(randX, randY, 1);
 	}
+
+
 }
