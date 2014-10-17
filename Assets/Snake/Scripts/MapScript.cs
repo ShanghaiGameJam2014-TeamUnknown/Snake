@@ -4,22 +4,18 @@ using System.Collections.Generic;
 
 public class MapScript : MonoBehaviour {
 	
-	public int MapSize;
+
 	public GameObject TilePrefab;
 	public GameObject FoodPrefab;
 
+	private List<GameObject> FoodTiles;
 	private GameObject[,] MapTiles;
-	private float MapOffset;
+	private int MapSize;
 
 	// Use this for initialization
 	void Start() {
-		int unitSize = TilePrefab.GetComponent<TileScript>().UnitSize;
-		MapOffset = -(MapSize/2*unitSize/Utilities.PIXELPERUNIT);
-
-		GameMaster.instance.SetMapOffset(MapOffset);
-		Debug.Log(GameMaster.instance.GetMapOffset());
-
-		transform.position = new Vector3(MapOffset, MapOffset, 0);
+		transform.position = new Vector3(GameMaster.instance.GetMapOffset(), GameMaster.instance.GetMapOffset(), 0);
+		MapSize = GameMaster.instance.MapSize;
 
 		MapTiles = new GameObject[MapSize,MapSize];
 		for (int i=0; i<MapSize; i++) {
@@ -29,7 +25,7 @@ public class MapScript : MonoBehaviour {
 				TileScript unit = MapTiles[i, j].GetComponent<TileScript>();
 				unit.MapPos.x = i;
 				unit.MapPos.y = j;
-				unit.MapOffset = MapOffset;
+				unit.MapOffset = GameMaster.instance.GetMapOffset();
 				unit.UpdatePosition();
 				MapTiles[i, j].SetActive(true);
 			}
@@ -41,13 +37,9 @@ public class MapScript : MonoBehaviour {
 		
 	}
 
-	public void RandomFood() {
-
-		List<Vector2> availableTiles = GameMaster.instance.GetAvailableTileIndex();
+	public void RandomFood(List<Vector2> availableTiles) {
 		int randIndex = Random.Range(0, availableTiles.Count);
 		Vector2 randPos = availableTiles[randIndex];
-
-		
 		int randX = (int)randPos.x;
 		int randY = (int)randPos.y;
 
@@ -56,11 +48,9 @@ public class MapScript : MonoBehaviour {
 		TileScript unit = MapTiles[randX, randY].GetComponent<TileScript>();
 		unit.MapPos.x = randX;
 		unit.MapPos.y = randY;
-		unit.MapOffset = MapOffset;
+		unit.MapOffset = GameMaster.instance.GetMapOffset();
 		unit.UpdatePosition();
 		MapTiles[randX, randY].SetActive(true);
-
-		GameMaster.instance.SetMapStatus(randX, randY, 1);
 	}
 
 

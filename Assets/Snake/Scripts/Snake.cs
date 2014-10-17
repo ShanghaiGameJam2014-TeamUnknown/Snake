@@ -30,8 +30,7 @@ public class Snake : MonoBehaviour {
 			TileScript unit = bodyItem.GetComponent<TileScript>();
 			unit.MapPos.x = i;
 			unit.MapPos.y = 0;
-			//unit.MapOffset = GameMaster.instance.GetMapOffset();
-			//Debug.Log(GameMaster.instance.GetMapOffset());
+			unit.MapOffset = GameMaster.instance.GetMapOffset();
 			unit.UpdatePosition();
 			bodyItem.SetActive(true);
 

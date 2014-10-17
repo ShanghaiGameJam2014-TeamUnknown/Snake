@@ -7,9 +7,11 @@ public class GameMaster : MonoBehaviour {
 	public GameObject GameMap;
 	public GameObject PlayerSnake;
 
+	public int MapSize;
+	public GameObject TilePrefab;
+
 	private float mapOffset;
 	private float passedTime;
-	private MapScript mapLogic;
 
 	private int[,] mapStatus;
 
@@ -35,8 +37,8 @@ public class GameMaster : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		passedTime = 0;
-		mapLogic = GameMap.GetComponent<MapScript>();
-		InitMapStatus();
+		mapStatus = new int[MapSize,MapSize];
+		ClearMapStatus();
 	}
 	
 	// Update is called once per frame
@@ -44,7 +46,7 @@ public class GameMaster : MonoBehaviour {
 		// generate foods
 		passedTime += Time.deltaTime;
 		if (passedTime > 2) {
-			mapLogic.RandomFood();
+			//mapLogic.RandomFood(GetAvailableTileIndex());
 			passedTime = 0;
 		}
 
@@ -55,33 +57,25 @@ public class GameMaster : MonoBehaviour {
 		return null;
 	}
 
-	void InitMapStatus()
+	void ClearMapStatus()
 	{
-		mapStatus = new int[mapLogic.MapSize,mapLogic.MapSize];
-
-		for(int i=0;i<mapLogic.MapSize;i++)
-		{
-			for(int j=0; j<mapLogic.MapSize; j++)
-			{
+		for(int i=0;i<MapSize;i++) {
+			for(int j=0; j<MapSize; j++) {
 				mapStatus[i,j] = 0;
 			}
 		}
 	}
 
-	public void SetMapStatus(int i, int j, int type)
-	{
-		mapStatus[i,j] = type;
-	}
-
 	public List<Vector2> GetAvailableTileIndex()
 	{
+		// iterate snakeTiles, set mapStatus
+		List<GameObject> snakeTiles = PlayerSnake.GetComponent<Snake>().Body;
+
+
 		List<Vector2> availableTileIndex = new List<Vector2>();
-		for(int i=0;i<mapLogic.MapSize;i++)
-		{
-			for(int j=0; j<mapLogic.MapSize; j++)
-			{
-				if(mapStatus[i,j] == 0)
-				{
+		for (int i=0;i<MapSize;i++) {
+			for (int j=0; j<MapSize; j++) {
+				if (mapStatus[i,j] == 0) {
 					availableTileIndex.Add(new Vector2(i, j));
 				}
 			}
@@ -90,13 +84,9 @@ public class GameMaster : MonoBehaviour {
 		return availableTileIndex;
 	}
 
-	public void SetMapOffset(float offset)
-	{
-		mapOffset = offset;
-	}
-
 	public float GetMapOffset()
 	{
-		return mapOffset;
+		int unitSize = TilePrefab.GetComponent<TileScript>().UnitSize;
+		return -(MapSize/2*unitSize/Utilities.PIXELPERUNIT);
 	}
 }
