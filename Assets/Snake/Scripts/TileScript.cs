@@ -1,8 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnitTile : MonoBehaviour {
+public enum TileType
+{
+	TERRAIN,
+	FOOD1,
+	FOOD2
+}
 
+public class TileScript : MonoBehaviour {
+
+	public TileType TileType;
 	public int UnitSize;
 
 	public Vector2 MapPos;
@@ -58,8 +66,7 @@ public class UnitTile : MonoBehaviour {
 		if(col.gameObject.tag == "Player")
 		{
 			Debug.Log("Player hit");
-
-			//col.gameObject.GetComponent();
+			//Snake snake = col.gameObject.GetComponent<Snake>();
 		}
 	}
 }

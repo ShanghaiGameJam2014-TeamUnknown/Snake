@@ -10,10 +10,15 @@ public class Map : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		MapTiles = new GameObject[MapSize,MapSize];
+
 		for (int i=0; i<MapSize; i++) {
 			for (int j=0; j<MapSize; j++) {
 				MapTiles[i, j] = Instantiate(TilePrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
-				MapTiles[i, j].GetComponent<UnitTile>().UpdatePosition();
+				TileScript unit = MapTiles[i, j].GetComponent<TileScript>();
+				unit.MapPos.x = i;
+				unit.MapPos.y = j;
+				unit.UpdatePosition();
 				MapTiles[i, j].SetActive(true);
 			}
 		}

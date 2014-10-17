@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Snake : MonoBehaviour {
 
-	public List<UnitTile> Body;
+	public List<TileScript> Body;
 
 	// Use this for initialization
 	void Start ()
