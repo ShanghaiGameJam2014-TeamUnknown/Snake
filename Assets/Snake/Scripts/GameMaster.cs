@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class GameMaster : MonoBehaviour {
 
 	public GameObject GameMap;
+	public GameObject PlayerSnake;
 
 	private float passedTime;
 	private MapScript mapLogic;
@@ -38,12 +39,19 @@ public class GameMaster : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+		// generate foods
 		passedTime += Time.deltaTime;
 		if (passedTime > 2) {
 			mapLogic.RandomFood();
 			passedTime = 0;
 		}
+
+		// change directions
+	}
+
+	public GameObject GetTile(int x, int y) {
+		return null;
 	}
 
 	void InitMapStatus()
