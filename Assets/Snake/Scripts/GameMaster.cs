@@ -17,7 +17,8 @@ public class GameMaster : MonoBehaviour {
 	private float passedTime;
 
 	private int[,] mapStatus;
-	
+
+	private bool IsGameOver;
 	private static GameMaster _instance;
 	public static GameMaster instance {
 		get {
@@ -42,6 +43,10 @@ public class GameMaster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		if(IsGameOver)
+		{
+			return;
+		}
 		// generate foods
 		passedTime += Time.deltaTime;
 		if (passedTime > 10) {
@@ -115,5 +120,10 @@ public class GameMaster : MonoBehaviour {
 	{
 		int unitSize = TilePrefab.GetComponent<TileScript>().UnitSize;
 		return -(MapSizeY/2*unitSize/Utilities.PIXELPERUNIT);
+	}
+
+	public void GameOver()
+	{
+		IsGameOver = true;
 	}
 }

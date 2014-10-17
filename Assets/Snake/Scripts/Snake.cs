@@ -15,6 +15,7 @@ public class Snake : MonoBehaviour {
 	public GameObject FoodPrefab;
 	
 	private int FramCount;
+	private bool IsDead;
 	// Use this for initialization
 	void Start ()
 	{
@@ -97,7 +98,20 @@ public class Snake : MonoBehaviour {
 	}
 
 	void Die() {
-		Debug.Log("Die!");
+
+		for(int i=0; i<Body.Count; i++)
+		{
+			Body[i].GetComponent<TileScript>().Anim = "dead";
+			Body[i].GetComponent<Animator>().SetTrigger("dead");
+		}
+
+		IsDead = true;
+		GameMaster.instance.GameOver();
+	}
+
+	bool GetIsDead()
+	{
+		return IsDead;
 	}
 
 	void InputX()
