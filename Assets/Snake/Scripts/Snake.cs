@@ -122,6 +122,7 @@ public class Snake : MonoBehaviour {
 			{
 				CurrentDirection = pendingDirection;
 				//UpdateSnakeAnimation(CurrentDirection, Body[Body.Count-1]);
+				Debug.Log("xx");
 			}
 		}
 	}
@@ -158,7 +159,7 @@ public class Snake : MonoBehaviour {
 			Vector2 temp = tile.MapPos;
 			tile.MapPos = prePos;
 			
-			UpdateSnakeAnimation(prePos-temp, Body[i]);
+			UpdateSnakeAnimation(prePos - temp, Body[i]);
 			tile.UpdatePosition();
 
 			//Debug.Log("Here");
