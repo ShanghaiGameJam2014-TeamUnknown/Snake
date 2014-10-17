@@ -7,6 +7,7 @@ public class GameMaster : MonoBehaviour {
 	public GameObject GameMap;
 	public GameObject PlayerSnake;
 
+	private float mapOffset;
 	private float passedTime;
 	private MapScript mapLogic;
 
@@ -87,5 +88,15 @@ public class GameMaster : MonoBehaviour {
 		}
 
 		return availableTileIndex;
+	}
+
+	public void SetMapOffset(float offset)
+	{
+		mapOffset = offset;
+	}
+
+	public float GetMapOffset()
+	{
+		return mapOffset;
 	}
 }

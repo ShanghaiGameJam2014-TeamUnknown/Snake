@@ -15,6 +15,10 @@ public class MapScript : MonoBehaviour {
 	void Start() {
 		int unitSize = TilePrefab.GetComponent<TileScript>().UnitSize;
 		MapOffset = -(MapSize/2*unitSize/Utilities.PIXELPERUNIT);
+
+		GameMaster.instance.SetMapOffset(MapOffset);
+		Debug.Log(GameMaster.instance.GetMapOffset());
+
 		transform.position = new Vector3(MapOffset, MapOffset, 0);
 
 		MapTiles = new GameObject[MapSize,MapSize];
