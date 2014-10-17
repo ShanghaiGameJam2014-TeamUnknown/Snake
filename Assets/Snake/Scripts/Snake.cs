@@ -4,17 +4,49 @@ using System.Collections.Generic;
 
 public class Snake : MonoBehaviour {
 
-	public List<TileScript> Body;
+	public List<GameObject> Body;
+	public int InitNumber;
 
+	public int Speed;
+
+	public Vector2 CurrentDirection;
+	
+	private int FramCount;
 	// Use this for initialization
 	void Start ()
 	{
-	
+		CurrentDirection = Utilities.RIGHT;
 	}
-	
+
+	void FixedUpdate()
+	{
+		if(FramCount < Speed)
+		{
+			FramCount++;
+		}
+		else
+		{
+			TileScript head = Body[Body.Count - 1].gameObject.GetComponent<TileScript>();
+			//Vector2 newPos = head.MapPos + CurrentDirection;
+			
+			//Check Map to see whether the mappos is food.
+			if(true)//GM.Instance.GetTile(newPos);)
+			{
+				//Body.Add();
+				//AddHead();
+			}
+			FramCount=0;
+		}
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
-	
+
+	}
+
+	public void AddHead(GameObject newHead)
+	{
+		Body.Add(newHead);
 	}
 }
