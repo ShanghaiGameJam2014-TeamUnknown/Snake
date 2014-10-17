@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnitTileScript : MonoBehaviour {
+public class UnitTile : MonoBehaviour {
 
 	public int UnitSize;
 
@@ -22,8 +22,8 @@ public class UnitTileScript : MonoBehaviour {
 	public void UpdatePosition()
 	{
 		Vector3 pos = new Vector3();
-		pos.x = UnitSize*MapPos.x / 100;
-		pos.y = UnitSize*MapPos.y / 100;
+		pos.x = UnitSize*MapPos.x / Utilities.PIXELPERUNIT;
+		pos.y = UnitSize*MapPos.y / Utilities.PIXELPERUNIT;
 		pos.z = 0;
 
 		transform.position = pos;
