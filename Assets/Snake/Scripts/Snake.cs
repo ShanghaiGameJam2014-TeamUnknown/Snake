@@ -10,6 +10,8 @@ public class Snake : MonoBehaviour {
 
 	public Vector2 CurrentDirection;
 
+	private Vector2 PreviousDirection;
+
 	public GameObject FoodPrefab;
 	
 	private int FramCount;
@@ -37,7 +39,7 @@ public class Snake : MonoBehaviour {
 			Body.Add(bodyItem);
 			
 		}
-		CurrentDirection = Utilities.RIGHT;
+		//CurrentDirection = Utilities.RIGHT;
 	}
 
 	void FixedUpdate()
@@ -71,9 +73,36 @@ public class Snake : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		TileScript head = Body[Body.Count - 1].gameObject.GetComponent<TileScript>();
 
+		Vector2 pendingDirection = Vector2.zero;
+
+		if(Input.GetKey(KeyCode.A))
+		{
+			//PreviousDirection = CurrentDirection;
+			pendingDirection = Utilities.LEFT;
+		}
+		else if(Input.GetKey(KeyCode.D))
+		{	
+			pendingDirection = Utilities.RIGHT;
+		}
+		else if(Input.GetKey(KeyCode.W))
+		{	
+			pendingDirection = Utilities.UP;
+		}
+		else if(Input.GetKey(KeyCode.S))
+		{
+			pendingDirection = Utilities.DOWN;
+		}
+		Vector2 newPos = head.MapPos + pendingDirection;
+		
+		//GameObject tile = GameMaster.instance.GetTile((int)newPos.x, (int)newPos.y);
+		//if(tile.tag!="snake")
+		{
+			//CurrentDirection = pendingDirection;
+		}
 	}
-
+	
 	void UpdateSnakePosition(Vector2 newHeadPosition)
 	{
 		Vector2 prePos = newHeadPosition;
