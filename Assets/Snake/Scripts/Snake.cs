@@ -57,15 +57,15 @@ public class Snake : MonoBehaviour {
 
 			UpdateSnakePosition(newPos);
 			// Ask GM whether the newPos has food or is snake
-			//GameObject toEat = GameMaster.instance.GetTile((int)newPos.x, (int)newPos.y);
-			//if (toEat.tag == "food")
-			//{
+			GameObject toEat = GameMaster.instance.GetTile((int)newPos.x, (int)newPos.y);
+			if (toEat.tag == "food")
+			{
 				// Body.Add();
 				// AddHead();
-			//}
-			//else if (toEat.tag == "snake") {
+			}
+			else if (toEat.tag == "snake") {
 				// Death;
-			//}
+			}
 			FramCount=0;
 		}
 	}
@@ -77,29 +77,24 @@ public class Snake : MonoBehaviour {
 
 		Vector2 pendingDirection = Vector2.zero;
 
-		if(Input.GetKey(KeyCode.A))
-		{
+		if(Input.GetKey(KeyCode.A)) {
 			//PreviousDirection = CurrentDirection;
 			pendingDirection = Utilities.LEFT;
 		}
-		else if(Input.GetKey(KeyCode.D))
-		{	
+		else if(Input.GetKey(KeyCode.D)) {	
 			pendingDirection = Utilities.RIGHT;
 		}
-		else if(Input.GetKey(KeyCode.W))
-		{	
+		else if(Input.GetKey(KeyCode.W)) {	
 			pendingDirection = Utilities.UP;
 		}
-		else if(Input.GetKey(KeyCode.S))
-		{
+		else if(Input.GetKey(KeyCode.S)) {
 			pendingDirection = Utilities.DOWN;
 		}
 		Vector2 newPos = head.MapPos + pendingDirection;
 		
-		//GameObject tile = GameMaster.instance.GetTile((int)newPos.x, (int)newPos.y);
-		//if(tile.tag!="snake")
-		{
-			//CurrentDirection = pendingDirection;
+		GameObject tile = GameMaster.instance.GetTile((int)newPos.x, (int)newPos.y);
+		if (tile.tag != "snake") {
+			CurrentDirection = pendingDirection;
 		}
 	}
 	

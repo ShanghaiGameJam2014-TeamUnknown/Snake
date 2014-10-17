@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MapScript : MonoBehaviour {
-	
-
 	public GameObject TilePrefab;
 	public GameObject FoodPrefab;
 
@@ -32,9 +30,8 @@ public class MapScript : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update() {
-		
+	public List<GameObject> GetFoodTiles() {
+		return FoodTiles;
 	}
 
 	public void RandomFood(List<Vector2> availableTiles) {

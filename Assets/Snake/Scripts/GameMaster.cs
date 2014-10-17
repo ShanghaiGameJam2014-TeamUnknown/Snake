@@ -10,21 +10,17 @@ public class GameMaster : MonoBehaviour {
 	public int MapSize;
 	public GameObject TilePrefab;
 
+	private MapScript mapLogic;
 	private float mapOffset;
 	private float passedTime;
 
 	private int[,] mapStatus;
-
-	//Here is a private reference only this class can access
-	private static GameMaster _instance;
 	
-	//This is the public reference that other classes will use
+	private static GameMaster _instance;
 	public static GameMaster instance
 	{
 		get
 		{
-			//If _instance hasn't been set yet, we grab it from the scene!
-			//This will only happen the first time this reference is used.
 			if(_instance == null)
 			{
 				_instance = GameObject.FindObjectOfType<GameMaster>();
@@ -54,6 +50,21 @@ public class GameMaster : MonoBehaviour {
 	}
 
 	public GameObject GetTile(int x, int y) {
+		List<GameObject> foodTiles = mapLogic.GetFoodTiles();
+		foreach (GameObject ft in foodTiles) {
+			Vector2 pos = ft.GetComponent<TileScript>().MapPos;
+			if ((pos.x == x) && (pos.y == y)) {
+				return ft;
+			}
+		}
+
+		List<GameObject> bodyTiles = PlayerSnake.GetComponent<Snake>().Body;
+		foreach (GameObject bt in bodyTiles) {
+			Vector2 pos = bt.GetComponent<TileScript>().MapPos;
+			if ((pos.x == x) && (pos.y == y)) {
+				return bt;
+			}
+		}
 		return null;
 	}
 
