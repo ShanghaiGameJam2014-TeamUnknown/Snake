@@ -17,11 +17,12 @@ public class TileScript : MonoBehaviour {
 	public float MapOffsetY;
 
 	public Vector2 MapPos;
+	public string Anim;
 
 	// Use this for initialization
 	void Start ()
 	{
-	
+		Anim = "create";
 	}
 	
 	// Update is called once per frame

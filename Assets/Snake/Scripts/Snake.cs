@@ -117,10 +117,38 @@ public class Snake : MonoBehaviour {
 		
 		GameObject tile = GameMaster.instance.GetTile((int)newPos.x, (int)newPos.y);
 		if (tile==null || tile.tag != "snake") {
-			CurrentDirection = pendingDirection;
+
+			if(CurrentDirection!=pendingDirection)
+			{
+				CurrentDirection = pendingDirection;
+				//UpdateSnakeAnimation(CurrentDirection, Body[Body.Count-1]);
+			}
 		}
 	}
-	
+
+	void UpdateSnakeAnimation(Vector2 direction, GameObject tile)
+	{
+		string anim="create";
+		if(direction == Utilities.LEFT)
+		{
+			anim = "walk_left";
+		}
+		else if(direction == Utilities.RIGHT)
+		{
+			anim = "walk_right";
+		}
+		else if(direction==Utilities.UP)
+		{
+			anim = "walk_back";
+		}
+		else if(direction==Utilities.DOWN)
+		{
+			anim = "walk";
+		}
+
+		tile.GetComponent<Animator>().SetTrigger(anim);
+	}
+
 	void UpdateSnakePosition(Vector2 newHeadPosition)
 	{
 		Vector2 prePos = newHeadPosition;
@@ -129,8 +157,11 @@ public class Snake : MonoBehaviour {
 			TileScript tile = Body[i].gameObject.GetComponent<TileScript>();
 			Vector2 temp = tile.MapPos;
 			tile.MapPos = prePos;
+			
+			UpdateSnakeAnimation(prePos-temp, Body[i]);
 			tile.UpdatePosition();
 
+			//Debug.Log("Here");
 			prePos = temp;
 		}
 	}
