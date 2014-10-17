@@ -32,7 +32,8 @@ public class Snake : MonoBehaviour {
 			TileScript unit = bodyItem.GetComponent<TileScript>();
 			unit.MapPos.x = i;
 			unit.MapPos.y = 0;
-			unit.MapOffset = GameMaster.instance.GetMapOffset();
+			unit.MapOffsetX = GameMaster.instance.GetMapOffsetX();
+			unit.MapOffsetY = GameMaster.instance.GetMapOffsetY();
 			unit.UpdatePosition();
 			bodyItem.SetActive(true);
 
@@ -52,10 +53,10 @@ public class Snake : MonoBehaviour {
 		{
 			TileScript head = Body[Body.Count - 1].gameObject.GetComponent<TileScript>();
 			Vector2 newPos = head.MapPos + CurrentDirection;
-			if ((newPos.x<0) || (newPos.x>=GameMaster.instance.MapSize)) {
+			if ((newPos.x<0) || (newPos.x>=GameMaster.instance.MapSizeX)) {
 				Die();
 			}
-			else if ((newPos.y<0) || (newPos.y >=GameMaster.instance.MapSize)) {
+			else if ((newPos.y<0) || (newPos.y >=GameMaster.instance.MapSizeY)) {
 				Die();
 			}
 			else {
@@ -69,7 +70,8 @@ public class Snake : MonoBehaviour {
 					TileScript unit = newHead.GetComponent<TileScript>();
 					unit.MapPos.x = (int)newPos.x;
 					unit.MapPos.y = (int)newPos.y;
-					unit.MapOffset = GameMaster.instance.GetMapOffset();
+					unit.MapOffsetX = GameMaster.instance.GetMapOffsetX();
+					unit.MapOffsetY = GameMaster.instance.GetMapOffsetY();
 					unit.UpdatePosition();
 					newHead.SetActive(true);
 					toEat.SetActive(false);

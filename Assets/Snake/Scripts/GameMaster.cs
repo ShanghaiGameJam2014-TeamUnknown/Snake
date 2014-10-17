@@ -7,22 +7,21 @@ public class GameMaster : MonoBehaviour {
 	public GameObject GameMap;
 	public GameObject PlayerSnake;
 
-	public int MapSize;
+	public int MapSizeX;
+	public int MapSizeY;
 	public GameObject TilePrefab;
 
 	private MapScript mapLogic;
-	private float mapOffset;
+	private float mapOffsetX;
+	private float mapOffsetY;
 	private float passedTime;
 
 	private int[,] mapStatus;
 	
 	private static GameMaster _instance;
-	public static GameMaster instance
-	{
-		get
-		{
-			if(_instance == null)
-			{
+	public static GameMaster instance {
+		get {
+			if(_instance == null) {
 				_instance = GameObject.FindObjectOfType<GameMaster>();
 			}
 			return _instance;
@@ -33,7 +32,7 @@ public class GameMaster : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		passedTime = 3;
-		mapStatus = new int[MapSize,MapSize];
+		mapStatus = new int[MapSizeX,MapSizeY];
 
 		mapLogic = GameMap.GetComponent<MapScript>();
 		ClearMapStatus();
@@ -74,8 +73,8 @@ public class GameMaster : MonoBehaviour {
 
 	void ClearMapStatus()
 	{
-		for(int i=0;i<MapSize;i++) {
-			for(int j=0; j<MapSize; j++) {
+		for(int i=0;i<MapSizeX;i++) {
+			for(int j=0; j<MapSizeY; j++) {
 				mapStatus[i,j] = (int)TileType.EMPTY;
 			}
 		}
@@ -95,8 +94,8 @@ public class GameMaster : MonoBehaviour {
 		}
 
 		List<Vector2> availableTileIndex = new List<Vector2>();
-		for (int i=0;i<MapSize;i++) {
-			for (int j=0; j<MapSize; j++) {
+		for (int i=0;i<MapSizeX;i++) {
+			for (int j=0; j<MapSizeY; j++) {
 				if (mapStatus[i,j] == 0) {
 					availableTileIndex.Add(new Vector2(i, j));
 				}
@@ -106,9 +105,15 @@ public class GameMaster : MonoBehaviour {
 		return availableTileIndex;
 	}
 
-	public float GetMapOffset()
+	public float GetMapOffsetX()
 	{
 		int unitSize = TilePrefab.GetComponent<TileScript>().UnitSize;
-		return -(MapSize/2*unitSize/Utilities.PIXELPERUNIT);
+		return -(MapSizeX/2*unitSize/Utilities.PIXELPERUNIT);
+	}
+
+	public float GetMapOffsetY()
+	{
+		int unitSize = TilePrefab.GetComponent<TileScript>().UnitSize;
+		return -(MapSizeY/2*unitSize/Utilities.PIXELPERUNIT);
 	}
 }

@@ -13,7 +13,8 @@ public class TileScript : MonoBehaviour {
 
 	public TileType TileType;
 	public int UnitSize;
-	public float MapOffset;
+	public float MapOffsetX;
+	public float MapOffsetY;
 
 	public Vector2 MapPos;
 
@@ -32,8 +33,8 @@ public class TileScript : MonoBehaviour {
 	public void UpdatePosition()
 	{
 		Vector3 pos = new Vector3();
-		pos.x = UnitSize*MapPos.x / Utilities.PIXELPERUNIT + MapOffset;
-		pos.y = UnitSize*MapPos.y / Utilities.PIXELPERUNIT + MapOffset;
+		pos.x = UnitSize*MapPos.x / Utilities.PIXELPERUNIT + MapOffsetX;
+		pos.y = UnitSize*MapPos.y / Utilities.PIXELPERUNIT + MapOffsetY;
 		pos.z = 0;
 
 		transform.position = pos;

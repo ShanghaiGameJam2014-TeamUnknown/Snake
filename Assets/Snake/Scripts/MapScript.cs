@@ -14,7 +14,6 @@ public class MapScript : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start() {
-		transform.position = new Vector3(GameMaster.instance.GetMapOffset(), GameMaster.instance.GetMapOffset(), 0);
 	}
 	
 	public List<GameObject> GetFoodTiles() {
@@ -44,7 +43,8 @@ public class MapScript : MonoBehaviour {
 			TileScript unit = food.GetComponent<TileScript>();
 			unit.MapPos.x = randX;
 			unit.MapPos.y = randY;
-			unit.MapOffset = GameMaster.instance.GetMapOffset();
+			unit.MapOffsetX = GameMaster.instance.GetMapOffsetX();
+			unit.MapOffsetY = GameMaster.instance.GetMapOffsetY();
 			unit.UpdatePosition();
 			food.SetActive(true);
 
