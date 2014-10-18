@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class BossGM : MonoBehaviour {
 
 	public List<GameObject> SoldierPrefabs;
+	public GameObject Boss;
 
 	// Use this for initialization
 	void Start () {

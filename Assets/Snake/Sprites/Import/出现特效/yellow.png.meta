@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 10eed5dcd819a4490bd78361596f677c
+guid: 9bfd23ede9ea04ad3ab312b93dfdf052
 TextureImporter:
   fileIDToRecycleName:
-    21300000: "\u6811\u5996-03"
+    21300000: "\u51FA\u73B0\u7279\u6548 all-02_0"
+    21300002: "\u51FA\u73B0\u7279\u6548 all-02_1"
+    21300004: yellow_0
+    21300006: yellow_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,13 +29,13 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -43,6 +46,26 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: yellow_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: yellow_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
