@@ -51,25 +51,18 @@ public class GameMaster : MonoBehaviour {
 		if (passedTime >= regenTime) {
 			RegenFoods();
 		}
-
-		// change directions
-		if (Input.GetKey(KeyCode.O)) {
-			CommanData.CommonSnake = new List<Utilities.TileType>();
-			foreach (GameObject sp in PlayerSnake.GetComponent<Snake>().Body) {
-				CommanData.CommonSnake.Add(sp.GetComponent<TileScript>().TileType);
-			}
-			CommanData.CommonSnake.Reverse();
-			Application.LoadLevel("Boss");
-			PlayerSnake.GetComponent<Snake>().Die();
-		}
-
-		if(Input.GetKey(KeyCode.X))
-		{
-			BGMManager.instance.Play(Random.Range(0,2));
-		}
 	}
 
-	public void RegenFoods() {
+	public void BossLevel() {
+		CommanData.CommonSnake = new List<Utilities.TileType>();
+		foreach (GameObject sp in PlayerSnake.GetComponent<Snake>().Body) {
+			CommanData.CommonSnake.Add(sp.GetComponent<TileScript>().TileType);
+		}
+		CommanData.CommonSnake.Reverse();
+		Application.LoadLevel("Boss");
+	}
+		
+		public void RegenFoods() {
 		mapLogic.RandomFood(GetAvailableTileIndex());
 		passedTime = 0;
 	}

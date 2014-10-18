@@ -61,6 +61,9 @@ public class Snake : MonoBehaviour {
 		else {
 			TileScript head = Body[Body.Count - 1].gameObject.GetComponent<TileScript>();
 			Vector2 newPos = head.MapPos + CurrentDirection;
+			if ((newPos.x == 14) && (newPos.y == 4)) {
+				GameMaster.instance.BossLevel();
+			}
 			if ((newPos.x<0) || (newPos.x>=GameMaster.instance.MapSizeX)) {
 				Die();
 			}
