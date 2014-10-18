@@ -26,11 +26,22 @@ public class GameMaster : MonoBehaviour {
 		get {
 			if(_instance == null) {
 				_instance = GameObject.FindObjectOfType<GameMaster>();
+				DontDestroyOnLoad(_instance.gameObject);
 			}
 			return _instance;
 		}
 	}
-
+	void Awake() {
+		if (_instance == null) {
+			_instance = this;
+			DontDestroyOnLoad(this);
+		}
+		else {
+			if (this != _instance) {
+				Destroy(this.gameObject);
+			}
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
