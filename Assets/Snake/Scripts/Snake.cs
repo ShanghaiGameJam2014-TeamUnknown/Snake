@@ -108,6 +108,7 @@ public class Snake : MonoBehaviour {
 		}
 
 		InputX();
+		ChangeBGM();
 	}
 
 	public void Die() {
@@ -190,5 +191,21 @@ public class Snake : MonoBehaviour {
 		Body.Add(newHead);
 		LeadMark.transform.position = newHead.transform.position;
 		LeadMark.transform.parent = newHead.transform;
+	}
+
+	void ChangeBGM()
+	{
+		if(Body.Count>=0 && Body.Count<10)
+		{
+			BGMManager.instance.Play(0);
+		}
+		else if(Body.Count>=10 /*&& Body.Count<30*/)
+		{
+			BGMManager.instance.Play(1);
+		}
+		//else if(Body.Count >=20)
+		//{
+		//	BGMManager.instance.Play(2);
+		//}
 	}
 }

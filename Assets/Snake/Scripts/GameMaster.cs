@@ -62,6 +62,11 @@ public class GameMaster : MonoBehaviour {
 			Application.LoadLevel("Boss");
 			PlayerSnake.GetComponent<Snake>().Die();
 		}
+
+		if(Input.GetKey(KeyCode.X))
+		{
+			BGMManager.instance.Play(Random.Range(0,2));
+		}
 	}
 
 	public void RegenFoods() {
