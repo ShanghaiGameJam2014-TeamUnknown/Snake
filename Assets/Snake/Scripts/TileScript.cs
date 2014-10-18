@@ -1,17 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum TileType
-{
-	EMPTY = 0,
-	SNAKE,
-	FOOD1,
-	FOOD2
-}
-
 public class TileScript : MonoBehaviour {
 
-	public TileType TileType;
+	public Utilities.TileType TileType;
 	public int UnitSize;
 	public float MapOffsetX;
 	public float MapOffsetY;

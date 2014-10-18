@@ -26,20 +26,8 @@ public class GameMaster : MonoBehaviour {
 		get {
 			if(_instance == null) {
 				_instance = GameObject.FindObjectOfType<GameMaster>();
-				DontDestroyOnLoad(_instance.gameObject);
 			}
 			return _instance;
-		}
-	}
-	void Awake() {
-		if (_instance == null) {
-			_instance = this;
-			DontDestroyOnLoad(this);
-		}
-		else {
-			if (this != _instance) {
-				Destroy(this.gameObject);
-			}
 		}
 	}
 
@@ -66,6 +54,11 @@ public class GameMaster : MonoBehaviour {
 
 		// change directions
 		if (Input.GetKey(KeyCode.O)) {
+			CommanData.CommonSnake = new List<Utilities.TileType>();
+			foreach (GameObject sp in PlayerSnake.GetComponent<Snake>().Body) {
+				CommanData.CommonSnake.Add(sp.GetComponent<TileScript>().TileType);
+			}
+			CommanData.CommonSnake.Reverse();
 			Application.LoadLevel("Boss");
 			PlayerSnake.GetComponent<Snake>().Die();
 		}
@@ -98,7 +91,7 @@ public class GameMaster : MonoBehaviour {
 	void ClearMapStatus() {
 		for(int i=0;i<MapSizeX;i++) {
 			for(int j=0; j<MapSizeY; j++) {
-				mapStatus[i,j] = (int)TileType.EMPTY;
+				mapStatus[i,j] = (int)Utilities.TileType.EMPTY;
 			}
 		}
 	}
@@ -112,13 +105,13 @@ public class GameMaster : MonoBehaviour {
 		for(int i=0; i<snakeTiles.Count; i++)
 		{
 			TileScript tile = snakeTiles[i].GetComponent<TileScript>();
-			mapStatus[(int)tile.MapPos.x, (int)tile.MapPos.y] = (int)TileType.SNAKE;
+			mapStatus[(int)tile.MapPos.x, (int)tile.MapPos.y] = (int)tile.TileType;
 		}
 
 		List<Vector2> availableTileIndex = new List<Vector2>();
 		for (int i=0;i<MapSizeX;i++) {
 			for (int j=0; j<MapSizeY; j++) {
-				if (mapStatus[i,j] == 0) {
+				if (mapStatus[i,j] == (int)Utilities.TileType.EMPTY) {
 					availableTileIndex.Add(new Vector2(i, j));
 				}
 			}

@@ -23,16 +23,6 @@ public class Snake : MonoBehaviour {
 	private int FramCount;
 	private bool IsDead;
 
-	private static Snake _instance;
-	public static Snake instance {
-		get {
-			if(_instance == null) {
-				_instance = GameObject.FindObjectOfType<Snake>();
-			}
-			return _instance;
-		}
-	}
-
 	void Start () {
 		Speed = SlowestFrameCount;
 		InitSnake();

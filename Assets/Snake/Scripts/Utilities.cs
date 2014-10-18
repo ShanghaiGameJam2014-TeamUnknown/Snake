@@ -3,6 +3,18 @@ using System.Collections;
 
 public static class Utilities
 {
+	public enum TileType
+	{
+		EMPTY = 0,
+		BLUE,
+		GOLDEN,
+		GREEN,
+		ORANGE,
+		PURPLE,
+		WHITE,
+		YELLOW
+	}
+
 	public const float PIXELPERUNIT = 100;
 	public static Vector2 UP
 	{
