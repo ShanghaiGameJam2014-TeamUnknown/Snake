@@ -28,24 +28,14 @@ public class AudioManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(sequence.Count <=0)
-		{
-			return;
-		}
-
-		if (current >= 1) 
-		{
+		if ((int)CommanData.CommonSnake[idx] >= 1)  {
 			waittime += Time.deltaTime;
-
 		}
 
-		if (waittime>=TimeArray[k]/2|| current==1)
+		if (waittime>=TimeArray[k]/2|| (int)CommanData.CommonSnake[idx]==1)
 		{
 			  string filename = ((int)CommanData.CommonSnake[idx]).ToString();
 			  Play (filename);
-			current=sequence[0]+1;
-			sequence.RemoveAt(0);
-			//Random.Range (1,7);
 			  waittime=0;
 			  if (k<=TimeArray.Length-2)
 			  {
@@ -64,23 +54,9 @@ public class AudioManager : MonoBehaviour {
 
 	public void Play(string str)
 	{
+		Debug.Log(str);
 		audioMgr.clip = (AudioClip)Resources.Load(str, typeof(AudioClip));//调用Resources方法加载AudioClip资源
-		audioMgr.volume = 3;
-		//musiclength = audioMgr.clip.length;
+		audioMgr.volume = 80;
 		audioMgr.Play();
-		//audioMgr.clip = Resources.LoadAssetAtPath<AudioClip>("../../1");
-		//audioMgr.Play();
-		//Debug.Break();
-
-	}
-
-	private static AudioManager _instance;
-	public static AudioManager instance {
-		get {
-			if(_instance == null) {
-				_instance = GameObject.FindObjectOfType<AudioManager>();
-			}
-			return _instance;
-		}
 	}
 }
