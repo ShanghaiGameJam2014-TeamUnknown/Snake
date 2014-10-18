@@ -62,7 +62,6 @@ public class GameMaster : MonoBehaviour {
 		passedTime += Time.deltaTime;
 		if (passedTime >= regenTime) {
 			RegenFoods();
-			passedTime = 0;
 		}
 
 		// change directions
@@ -70,6 +69,7 @@ public class GameMaster : MonoBehaviour {
 
 	public void RegenFoods() {
 		mapLogic.RandomFood(GetAvailableTileIndex());
+		passedTime = 0;
 	}
 
 	public GameObject GetTile(int x, int y) {
