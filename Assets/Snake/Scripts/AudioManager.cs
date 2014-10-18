@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour {
 	public AudioSource audioMgr;
@@ -8,6 +9,16 @@ public class AudioManager : MonoBehaviour {
 	private int yinfu;
 	private int k;
 	private float[] TimeArray;
+
+	private int current;
+	public List<int> sequence;
+
+	void Awake()
+	{
+		sequence = new List<int>();
+		k = 0;
+	}
+
 	// Use this for initialization
 	void Start () {
 		//TimeArray = new float[]{1f,0.5f,1f,0.5f,1f,0.5f,1f,0.5f};
@@ -16,20 +27,24 @@ public class AudioManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (yinfu >= 1) 
+		if(sequence.Count <=0)
+		{
+			return;
+		}
+
+		if (current >= 1) 
 		{
 			waittime += Time.deltaTime;
 
 		}
-		if (Input.anyKeyDown) {
-			yinfu=1;
-			k=0;
-		}
-			if (waittime>=TimeArray[k]/2|| yinfu==1)
+
+		if (waittime>=TimeArray[k]/2|| current==1)
 		{
 			  string filename = yinfu.ToString();
 			  Play (filename);
-			  yinfu=Random.Range (1,7);
+			current=sequence[0]+1;
+			sequence.RemoveAt(0);
+			//Random.Range (1,7);
 			  waittime=0;
 			  if (k<=TimeArray.Length-2)
 			  {
@@ -52,5 +67,15 @@ public class AudioManager : MonoBehaviour {
 		//audioMgr.Play();
 		//Debug.Break();
 
+	}
+
+	private static AudioManager _instance;
+	public static AudioManager instance {
+		get {
+			if(_instance == null) {
+				_instance = GameObject.FindObjectOfType<AudioManager>();
+			}
+			return _instance;
+		}
 	}
 }
