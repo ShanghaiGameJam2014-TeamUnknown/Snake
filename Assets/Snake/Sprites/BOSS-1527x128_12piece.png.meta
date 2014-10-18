@@ -3,6 +3,21 @@ guid: 5b5eb48ddd8c543df9eebeab0dccc674
 TextureImporter:
   fileIDToRecycleName:
     21300000: BOSS-1527x128_12piece
+    21300002: BOSS-1527x128_12piece_0
+    21300004: BOSS-1527x128_12piece_1
+    21300006: BOSS-1527x128_12piece_2
+    21300008: BOSS-1527x128_12piece_3
+    21300010: BOSS-1527x128_12piece_4
+    21300012: BOSS-1527x128_12piece_5
+    21300014: BOSS-1527x128_12piece_6
+    21300016: BOSS-1527x128_12piece_7
+    21300018: BOSS-1527x128_12piece_8
+    21300020: BOSS-1527x128_12piece_9
+    21300022: BOSS-1527x128_12piece_10
+    21300024: BOSS-1527x128_12piece_11
+    21300026: BOSS-1527x128_12piece_12
+    21300028: BOSS-1527x128_12piece_13
+    21300030: BOSS-1527x128_12piece_14
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,13 +41,13 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -43,6 +58,156 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: BOSS-1527x128_12piece_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 87
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_1
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 0
+        width: 87
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_2
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 0
+        width: 87
+        height: 385
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_3
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 0
+        width: 88
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_4
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 0
+        width: 88
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_5
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 0
+        width: 88
+        height: 770
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_6
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 0
+        width: 88
+        height: 897
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_7
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 0
+        width: 89
+        height: 1025
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_8
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 0
+        width: 88
+        height: 1154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_9
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 0
+        width: 88
+        height: 1282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_10
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 0
+        width: 88
+        height: 1409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_11
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 0
+        width: 88
+        height: 1537
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_12
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 0
+        width: 87
+        height: 1666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_13
+      rect:
+        serializedVersion: 2
+        x: 1338
+        y: 0
+        width: 87
+        height: 1793
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BOSS-1527x128_12piece_14
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 87
+        height: 1920
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

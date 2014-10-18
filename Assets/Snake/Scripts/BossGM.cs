@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class BossGM : MonoBehaviour {
 
+	public Text t;
 	public List<GameObject> SoldierPrefabs;
 	public GameObject Boss;
 
@@ -11,6 +13,8 @@ public class BossGM : MonoBehaviour {
 	public int Speed;
 	public Vector3 v;
 	public Vector3 SoldierInitPos;
+
+	public List<Image> Bloods;
 
 	private int FrameCount;
 
@@ -28,6 +32,8 @@ public class BossGM : MonoBehaviour {
 		//{
 		//	AudioManager.instance.sequence.Add((int)CommanData.CommonSnake[i]);
 		//}
+		t.text = "Hello";
+
 	}
 	
 	// Update is called once per frame
