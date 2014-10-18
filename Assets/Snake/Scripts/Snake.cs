@@ -23,6 +23,10 @@ public class Snake : MonoBehaviour {
 	private int FramCount;
 	private bool IsDead;
 
+	public AudioSource foodSound;
+	public AudioSource wallSound;
+	public AudioSource snakeSound;
+
 	void Start () {
 		Speed = SlowestFrameCount;
 		InitSnake();
@@ -65,9 +69,13 @@ public class Snake : MonoBehaviour {
 				GameMaster.instance.BossLevel();
 			}
 			else if ((newPos.x<0) || (newPos.x>=GameMaster.instance.MapSizeX)) {
+				// Play sound
+				wallSound.Play();
 				Die();
 			}
 			else if ((newPos.y<0) || (newPos.y >=GameMaster.instance.MapSizeY)) {
+				// Play sound
+				wallSound.Play();
 				Die();
 			}
 			else {
@@ -92,6 +100,9 @@ public class Snake : MonoBehaviour {
 					UpdateSnakeAnimation(CurrentDirection, newHead);
 					UpdateSnakeAnimation(CurrentDirection, Body[Body.Count-2]);
 
+					// Play sound
+					foodSound.Play();
+
 					// Update speed
 					Speed = Mathf.Max(FastestFrameCount, SlowestFrameCount - (int)SpeedMultiplier*(Body.Count - InitNumber));
 
@@ -99,7 +110,8 @@ public class Snake : MonoBehaviour {
 					GameMaster.instance.RegenFoods();
 				}
 				else if (toEat!=null && toEat.tag == "snake") {
-					// Death;
+					// Play sound
+					snakeSound.Play();
 					Die();
 				}
 				else

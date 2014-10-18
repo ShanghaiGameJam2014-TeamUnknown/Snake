@@ -58,7 +58,7 @@ public class GameMaster : MonoBehaviour {
 			RegenFoods();
 		}
 		// check if boss unlocked
-		if (PlayerSnake.GetComponent<Snake>().Body.Count >= 10) {
+		if (PlayerSnake.GetComponent<Snake>().Body.Count >= 4) {
 			BossUnlocked = true;
 			RoadBlocker.SetActive(false);
 		}
