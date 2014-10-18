@@ -147,10 +147,6 @@ public class Snake : MonoBehaviour {
 			}
 		}
 	}
-	// Update is called once per frame
-	void Update() {
-
-	}
 
 	void UpdateSnakeAnimation(Vector2 direction, GameObject tile)
 	{

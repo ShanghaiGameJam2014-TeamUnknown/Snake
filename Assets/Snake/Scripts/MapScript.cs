@@ -12,21 +12,16 @@ public class MapScript : MonoBehaviour {
 	{
 		FoodTiles = new List<GameObject>();
 	}
-	// Use this for initialization
-	void Start() {
-	}
 	
 	public List<GameObject> GetFoodTiles() {
 		return FoodTiles;
 	}
 
 	public void RandomFood(List<Vector2> availableTiles) {
-
-		for(int i=0; i<FoodTiles.Count; i++)
+		foreach (GameObject ft in FoodTiles)
 		{
-			GameObject.Destroy(FoodTiles[i]);
+			GameObject.Destroy(ft);
 		}
-
 		FoodTiles.Clear();
 
 		for(int i=0; i<2; i++)
@@ -38,7 +33,6 @@ public class MapScript : MonoBehaviour {
 			int randY = (int)randPos.y;
 
 			GameObject food = Instantiate(FoodPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
-
 			food.tag = "food";
 			TileScript unit = food.GetComponent<TileScript>();
 			unit.MapPos.x = randX;
@@ -50,8 +44,5 @@ public class MapScript : MonoBehaviour {
 			food.GetComponent<Animator>().SetTrigger("create");
 			FoodTiles.Add(food);
 		}
-
 	}
-
-
 }

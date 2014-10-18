@@ -41,7 +41,6 @@ public class GameMaster : MonoBehaviour {
 		mapLogic.RandomFood(GetAvailableTileIndex());
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () {
 		if(IsGameOver)
 		{
