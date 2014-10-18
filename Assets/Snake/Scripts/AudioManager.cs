@@ -6,7 +6,7 @@ public class AudioManager : MonoBehaviour {
 	public AudioSource audioMgr;
 	//private float musiclength;
 	private float waittime;
-	private int yinfu;
+	private int idx;
 	private int k;
 	private float[] TimeArray;
 
@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour {
 	{
 		sequence = new List<int>();
 		k = 0;
+		idx = 0;
 	}
 
 	// Use this for initialization
@@ -40,7 +41,7 @@ public class AudioManager : MonoBehaviour {
 
 		if (waittime>=TimeArray[k]/2|| current==1)
 		{
-			  string filename = yinfu.ToString();
+			  string filename = ((int)CommanData.CommonSnake[idx]).ToString();
 			  Play (filename);
 			current=sequence[0]+1;
 			sequence.RemoveAt(0);
@@ -52,6 +53,10 @@ public class AudioManager : MonoBehaviour {
 			  }
 			  else
 			  {
+				idx ++;
+				if (idx >= CommanData.CommonSnake.Count) {
+					idx = 0;
+				}
 				k=0;
 			   }
 			}
