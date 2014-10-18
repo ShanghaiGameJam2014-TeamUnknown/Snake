@@ -64,7 +64,7 @@ public class Snake : MonoBehaviour {
 			if (GameMaster.instance.BossUnlocked && (newPos.x == 14) && (newPos.y == 4)) {
 				GameMaster.instance.BossLevel();
 			}
-			if ((newPos.x<0) || (newPos.x>=GameMaster.instance.MapSizeX)) {
+			else if ((newPos.x<0) || (newPos.x>=GameMaster.instance.MapSizeX)) {
 				Die();
 			}
 			else if ((newPos.y<0) || (newPos.y >=GameMaster.instance.MapSizeY)) {

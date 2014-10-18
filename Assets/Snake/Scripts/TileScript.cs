@@ -22,6 +22,8 @@ public class TileScript : MonoBehaviour {
 		pos.y = UnitSize*MapPos.y / Utilities.PIXELPERUNIT + MapOffsetY;
 		pos.z = 0;
 
+		Debug.Log("here");
+
 		transform.position = pos;
 	}
 

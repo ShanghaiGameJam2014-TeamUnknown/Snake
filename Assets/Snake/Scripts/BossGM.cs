@@ -48,7 +48,9 @@ public class BossGM : MonoBehaviour {
 			//first test if fail
 
 			//else
+			if (test) {
 				CrashToBoss(test);
+			}
 			// test if win
 
 			FrameCount = 0;
@@ -59,10 +61,11 @@ public class BossGM : MonoBehaviour {
 	{
 		tile.transform.position += v;
 
-		if(tile.transform.position.x >= Boss.transform.position.x + OffsetX)
+		if (tile.transform.position.x >= Boss.transform.position.x + OffsetX)
 		{
-			//tile.settrigger()
+			tile.GetComponent<Animator>().SetTrigger("defeat");
 			Debug.Log("Dead");
+			test = null;
 		}
 	}
 }
