@@ -11,6 +11,10 @@ public class Snake : MonoBehaviour {
 	public float SpeedMultiplier;
 
 	public Vector2 CurrentDirection;
+
+	public GameObject LeadMarkPrefab;
+
+	private GameObject LeadMark;
 	private Vector2 PreviousDirection;
 
 	public GameObject InitPrefab;
@@ -51,6 +55,10 @@ public class Snake : MonoBehaviour {
 			Body.Add(bodyItem);
 			
 		}
+
+		LeadMark = Instantiate(LeadMarkPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+		LeadMark.transform.position = Body[Body.Count-1].transform.position;
+		LeadMark.transform.parent = Body[Body.Count-1].transform;
 	}
 
 	void FixedUpdate() {
@@ -190,5 +198,7 @@ public class Snake : MonoBehaviour {
 
 	public void AddHead(GameObject newHead) {
 		Body.Add(newHead);
+		LeadMark.transform.position = newHead.transform.position;
+		LeadMark.transform.parent = newHead.transform;
 	}
 }
