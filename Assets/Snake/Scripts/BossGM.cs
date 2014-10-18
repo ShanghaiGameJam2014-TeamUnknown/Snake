@@ -17,6 +17,7 @@ public class BossGM : MonoBehaviour {
 	public Vector3 DefeatPos;
 
 	public List<Image> Bloods;
+	public int BossHP;
 
 	private int FrameCount;
 
@@ -43,6 +44,7 @@ public class BossGM : MonoBehaviour {
 			t.text = "Fail";
 			return ;
 		}
+		t.text = BossHP.ToString();
 		if(FrameCount<=Speed)
 		{
 			FrameCount++;
@@ -58,7 +60,9 @@ public class BossGM : MonoBehaviour {
 
 			CrashToBoss();
 
-			// test if wi n
+			if (BossHP <= 0) {
+				Application.LoadLevel("win");
+			}
 
 			FrameCount = 0;
 		}
@@ -78,6 +82,7 @@ public class BossGM : MonoBehaviour {
 			newDefeat.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
 			newDefeat.GetComponent<Animator>().SetTrigger("defeat");
 			currentIndex++;
+			BossHP--;
 		}
 	}
 }
