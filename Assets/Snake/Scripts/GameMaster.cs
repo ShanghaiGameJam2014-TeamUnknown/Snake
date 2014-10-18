@@ -65,6 +65,10 @@ public class GameMaster : MonoBehaviour {
 		}
 
 		// change directions
+		if (Input.GetKey(KeyCode.O)) {
+			Application.LoadLevel("Boss");
+			PlayerSnake.GetComponent<Snake>().Die();
+		}
 	}
 
 	public void RegenFoods() {

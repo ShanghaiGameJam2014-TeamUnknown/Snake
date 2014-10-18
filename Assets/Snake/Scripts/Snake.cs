@@ -13,7 +13,7 @@ public class Snake : MonoBehaviour {
 	public Vector2 CurrentDirection;
 	private Vector2 PreviousDirection;
 
-	public GameObject FoodPrefab;
+	public GameObject InitPrefab;
 
 	private int Speed;
 	private int FramCount;
@@ -36,7 +36,7 @@ public class Snake : MonoBehaviour {
 
 	void InitSnake() {
 		for(int i=0; i<InitNumber; i++) {
-			GameObject bodyItem = Instantiate(FoodPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+			GameObject bodyItem = Instantiate(InitPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 
 			bodyItem.tag = "snake";
 			
@@ -54,6 +54,9 @@ public class Snake : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		if (IsDead) {
+			return;
+		}
 		if(FramCount < Speed) {
 			FramCount++;
 		}
@@ -106,12 +109,10 @@ public class Snake : MonoBehaviour {
 			FramCount=0;
 		}
 
-		if(!IsDead) {
-			InputX();
-		}
+		InputX();
 	}
 
-	void Die() {
+	public void Die() {
 		for(int i=0; i<Body.Count; i++) {
 			Body[i].GetComponent<TileScript>().Anim = "dead";
 			Body[i].GetComponent<Animator>().SetTrigger("dead");
