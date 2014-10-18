@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MapScript : MonoBehaviour {
-	public GameObject TilePrefab;
 	public GameObject FoodPrefab;
 
 	private List<GameObject> FoodTiles;
