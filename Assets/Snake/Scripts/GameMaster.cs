@@ -7,6 +7,9 @@ public class GameMaster : MonoBehaviour {
 	public GameObject GameMap;
 	public GameObject PlayerSnake;
 
+	public GameObject RoadBlocker;
+	public bool BossUnlocked;
+
 	public int MapSizeX;
 	public int MapSizeY;
 	public GameObject TilePrefab;
@@ -40,6 +43,9 @@ public class GameMaster : MonoBehaviour {
 		ClearMapStatus();
 
 		mapLogic.RandomFood(GetAvailableTileIndex());
+
+		RoadBlocker.SetActive(true);
+		BossUnlocked = false;
 	}
 	
 	void FixedUpdate () {
@@ -50,6 +56,11 @@ public class GameMaster : MonoBehaviour {
 		passedTime += Time.deltaTime;
 		if (passedTime >= regenTime) {
 			RegenFoods();
+		}
+		// check if boss unlocked
+		if (PlayerSnake.GetComponent<Snake>().Body.Count >= 10) {
+			BossUnlocked = true;
+			RoadBlocker.SetActive(false);
 		}
 	}
 
