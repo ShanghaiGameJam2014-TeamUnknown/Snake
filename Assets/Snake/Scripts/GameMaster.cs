@@ -11,6 +11,8 @@ public class GameMaster : MonoBehaviour {
 	public int MapSizeY;
 	public GameObject TilePrefab;
 
+	public float regenTime;
+
 	private MapScript mapLogic;
 	private float mapOffsetX;
 	private float mapOffsetY;
@@ -42,13 +44,12 @@ public class GameMaster : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if(IsGameOver)
-		{
+		if(IsGameOver) {
 			return;
 		}
 		// generate foods
 		passedTime += Time.deltaTime;
-		if (passedTime > 10) {
+		if (passedTime >= regenTime) {
 			mapLogic.RandomFood(GetAvailableTileIndex());
 			passedTime = 0;
 		}
@@ -75,8 +76,7 @@ public class GameMaster : MonoBehaviour {
 		return null;
 	}
 
-	void ClearMapStatus()
-	{
+	void ClearMapStatus() {
 		for(int i=0;i<MapSizeX;i++) {
 			for(int j=0; j<MapSizeY; j++) {
 				mapStatus[i,j] = (int)TileType.EMPTY;
@@ -84,8 +84,7 @@ public class GameMaster : MonoBehaviour {
 		}
 	}
 
-	public List<Vector2> GetAvailableTileIndex()
-	{
+	public List<Vector2> GetAvailableTileIndex() {
 		ClearMapStatus();
 
 		// iterate snakeTiles, set mapStatus
@@ -109,20 +108,17 @@ public class GameMaster : MonoBehaviour {
 		return availableTileIndex;
 	}
 
-	public float GetMapOffsetX()
-	{
+	public float GetMapOffsetX() {
 		int unitSize = TilePrefab.GetComponent<TileScript>().UnitSize;
 		return -(MapSizeX/2*unitSize/Utilities.PIXELPERUNIT);
 	}
 
-	public float GetMapOffsetY()
-	{
+	public float GetMapOffsetY() {
 		int unitSize = TilePrefab.GetComponent<TileScript>().UnitSize;
 		return -(MapSizeY/2*unitSize/Utilities.PIXELPERUNIT);
 	}
 
-	public void GameOver()
-	{
+	public void GameOver() {
 		IsGameOver = true;
 	}
 }

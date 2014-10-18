@@ -16,16 +16,13 @@ public class Snake : MonoBehaviour {
 	
 	private int FramCount;
 	private bool IsDead;
-	// Use this for initialization
-	void Start ()
-	{
+
+	void Start () {
 		InitSnake();
 	}
 
-	void InitSnake()
-	{
-		for(int i=0; i<InitNumber; i++)
-		{
+	void InitSnake() {
+		for(int i=0; i<InitNumber; i++) {
 			GameObject bodyItem = Instantiate(FoodPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 
 			bodyItem.tag = "snake";
@@ -41,17 +38,13 @@ public class Snake : MonoBehaviour {
 			Body.Add(bodyItem);
 			
 		}
-		//CurrentDirection = Utilities.RIGHT;
 	}
 
-	void FixedUpdate()
-	{
-		if(FramCount < Speed)
-		{
+	void FixedUpdate() {
+		if(FramCount < Speed) {
 			FramCount++;
 		}
-		else
-		{
+		else {
 			TileScript head = Body[Body.Count - 1].gameObject.GetComponent<TileScript>();
 			Vector2 newPos = head.MapPos + CurrentDirection;
 			if ((newPos.x<0) || (newPos.x>=GameMaster.instance.MapSizeX)) {
@@ -94,16 +87,13 @@ public class Snake : MonoBehaviour {
 			FramCount=0;
 		}
 
-		if(!IsDead)
-		{
+		if(!IsDead) {
 			InputX();
 		}
 	}
 
 	void Die() {
-
-		for(int i=0; i<Body.Count; i++)
-		{
+		for(int i=0; i<Body.Count; i++) {
 			Body[i].GetComponent<TileScript>().Anim = "dead";
 			Body[i].GetComponent<Animator>().SetTrigger("dead");
 		}
@@ -112,13 +102,11 @@ public class Snake : MonoBehaviour {
 		GameMaster.instance.GameOver();
 	}
 
-	bool GetIsDead()
-	{
+	bool GetIsDead() {
 		return IsDead;
 	}
 
-	void InputX()
-	{
+	void InputX() {
 		TileScript head = Body[Body.Count - 1].gameObject.GetComponent<TileScript>();
 		
 		Vector2 pendingDirection = CurrentDirection;
@@ -139,47 +127,36 @@ public class Snake : MonoBehaviour {
 		
 		GameObject tile = GameMaster.instance.GetTile((int)newPos.x, (int)newPos.y);
 		if (tile==null || tile.tag != "snake") {
-			
-			if(CurrentDirection!=pendingDirection)
-			{
+			if(CurrentDirection!=pendingDirection) {
 				CurrentDirection = pendingDirection;
-
 			}
 		}
 	}
 
-	void UpdateSnakeAnimation(Vector2 direction, GameObject tile)
-	{
+	void UpdateSnakeAnimation(Vector2 direction, GameObject tile) {
 		string anim="create";
-		if(direction == Utilities.LEFT)
-		{
+		if (direction == Utilities.LEFT) {
 			anim = "walk_left";
 		}
-		else if(direction == Utilities.RIGHT)
-		{
+		else if (direction == Utilities.RIGHT) {
 			anim = "walk_right";
 		}
-		else if(direction==Utilities.UP)
-		{
+		else if (direction==Utilities.UP) {
 			anim = "walk_back";
 		}
-		else if(direction==Utilities.DOWN)
-		{
+		else if (direction==Utilities.DOWN) {
 			anim = "walk";
 		}
 
-		if(tile.GetComponent<TileScript>().Anim !=anim)
-		{
+		if(tile.GetComponent<TileScript>().Anim !=anim) {
 			tile.GetComponent<TileScript>().Anim = anim;
 			tile.GetComponent<Animator>().SetTrigger(anim);
 		}
 	}
 
-	void UpdateSnakePosition(Vector2 newHeadPosition)
-	{
+	void UpdateSnakePosition(Vector2 newHeadPosition) {
 		Vector2 prePos = newHeadPosition;
-		for(int i=Body.Count - 1; i>=0; i--)
-		{
+		for(int i=Body.Count - 1; i>=0; i--) {
 			TileScript tile = Body[i].gameObject.GetComponent<TileScript>();
 			Vector2 temp = tile.MapPos;
 			tile.MapPos = prePos;
@@ -191,8 +168,7 @@ public class Snake : MonoBehaviour {
 		}
 	}
 
-	public void AddHead(GameObject newHead)
-	{
+	public void AddHead(GameObject newHead) {
 		Body.Add(newHead);
 	}
 }

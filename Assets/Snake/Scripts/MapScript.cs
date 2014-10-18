@@ -8,8 +8,7 @@ public class MapScript : MonoBehaviour {
 
 	private List<GameObject> FoodTiles;
 
-	void Awake()
-	{
+	void Awake() {
 		FoodTiles = new List<GameObject>();
 	}
 	
@@ -18,14 +17,12 @@ public class MapScript : MonoBehaviour {
 	}
 
 	public void RandomFood(List<Vector2> availableTiles) {
-		foreach (GameObject ft in FoodTiles)
-		{
+		foreach (GameObject ft in FoodTiles) {
 			GameObject.Destroy(ft);
 		}
 		FoodTiles.Clear();
 
-		for(int i=0; i<2; i++)
-		{
+		for(int i=0; i<2; i++) {
 			int randIndex = Random.Range(0, availableTiles.Count);
 			Vector2 randPos = availableTiles[randIndex];
 			availableTiles.RemoveAt(randIndex);
