@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class MapScript : MonoBehaviour {
 	public GameObject FoodPrefab;
+	public List<GameObject> FoodPrefabs;
 
 	private List<GameObject> FoodTiles;
 
@@ -30,6 +31,9 @@ public class MapScript : MonoBehaviour {
 			availableTiles.RemoveAt(randIndex);
 			int randX = (int)randPos.x;
 			int randY = (int)randPos.y;
+
+			int randPrefabIndex = Random.Range(0, FoodPrefabs.Count);
+			GameObject randPrefab = FoodPrefabs[randPrefabIndex];
 
 			GameObject food = Instantiate(FoodPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 			food.tag = "food";
