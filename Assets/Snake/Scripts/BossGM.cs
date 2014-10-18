@@ -20,58 +20,64 @@ public class BossGM : MonoBehaviour {
 
 	private int FrameCount;
 
-	private GameObject test;
+	private GameObject runningTile;
+	private int currentIndex;
 	
 	// Use this for initialization
 	void Start () {
 		//Debug.Log(CommanData.CommonSnake.Count);
 		//Debug.Log((int)CommanData.CommonSnake[0]);
-		test = Instantiate(SoldierPrefabs[6], SoldierInitPos, Quaternion.identity) as GameObject;
-		test.SetActive(true);
-		test.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
-		test.GetComponent<Animator>().SetTrigger("walk_right");
 		//for(int i=0; i<CommanData.CommonSnake.Count;i++)
 		//{
 		//	AudioManager.instance.sequence.Add((int)CommanData.CommonSnake[i]);
 		//}
-		t.text = "Hello";
-
+		//t.text = "Hello";
+		currentIndex = 0;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		if (currentIndex >= CommanData.CommonSnake.Count) {
+			// fail
+			t.text = "Fail";
+			return ;
+		}
 		if(FrameCount<=Speed)
 		{
 			FrameCount++;
 		}
 		else
 		{
-			//first test if fail
-
-			//else
-			if (test) {
-				CrashToBoss(test);
+			if (!runningTile) {
+				runningTile = Instantiate(SoldierPrefabs[(int)CommanData.CommonSnake[currentIndex]-1], SoldierInitPos, Quaternion.identity) as GameObject;
+				runningTile.SetActive(true);
+				runningTile.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+				runningTile.GetComponent<Animator>().SetTrigger("walk_right");
 			}
-			// test if win
+
+			CrashToBoss();
+
+			// test if wi n
 
 			FrameCount = 0;
 		}
 	}
 
-	void CrashToBoss(GameObject tile)
+	void CrashToBoss()
 	{
-		tile.transform.position += v;
+		runningTile.transform.position += v;
 
-		if (tile.transform.position.x >= DefeatPos.x)
+		if (runningTile.transform.position.x >= DefeatPos.x)
 		{
-			tile.SetActive(false);
-			GameObject.Destroy(tile);
-			GameObject newDefeat = Instantiate(DefeatrPrefabs[6], DefeatPos, Quaternion.identity) as GameObject;
+			runningTile.SetActive(false);
+			GameObject.Destroy(runningTile);
+			runningTile = null;
+			GameObject newDefeat = Instantiate(DefeatrPrefabs[(int)CommanData.CommonSnake[currentIndex]-1], DefeatPos, Quaternion.identity) as GameObject;
 			newDefeat.SetActive(true);
 			newDefeat.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
 			newDefeat.GetComponent<Animator>().SetTrigger("defeat");
-			Debug.Log("Dead");
+			currentIndex++;
 		}
 	}
 }
