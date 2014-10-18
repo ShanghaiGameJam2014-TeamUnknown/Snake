@@ -90,6 +90,9 @@ public class Snake : MonoBehaviour {
 
 					// Update speed
 					Speed = Mathf.Max(FastestFrameCount, SlowestFrameCount - (int)SpeedMultiplier*(Body.Count - InitNumber));
+
+					// Regen Foods
+					GameMaster.instance.RegenFoods();
 				}
 				else if (toEat!=null && toEat.tag == "snake") {
 					// Death;
