@@ -5,19 +5,22 @@ using System.Collections.Generic;
 public class Snake : MonoBehaviour {
 	public List<GameObject> Body;
 	public int InitNumber;
-
-	public int Speed;
+	
+	public int SlowestFrameCount;
+	public int FastestFrameCount;
+	public float SpeedMultiplier;
 
 	public Vector2 CurrentDirection;
-
 	private Vector2 PreviousDirection;
 
 	public GameObject FoodPrefab;
-	
+
+	private int Speed;
 	private int FramCount;
 	private bool IsDead;
 
 	void Start () {
+		Speed = SlowestFrameCount;
 		InitSnake();
 	}
 
@@ -74,6 +77,9 @@ public class Snake : MonoBehaviour {
 					//newHead.GetComponent<TileScript>().Anim = Body[FramCount-1]
 					UpdateSnakeAnimation(CurrentDirection, newHead);
 					UpdateSnakeAnimation(CurrentDirection, Body[Body.Count-2]);
+
+					// Update speed
+					Speed = Mathf.Max(FastestFrameCount, SlowestFrameCount - (int)SpeedMultiplier*(Body.Count - InitNumber));
 				}
 				else if (toEat!=null && toEat.tag == "snake") {
 					// Death;
