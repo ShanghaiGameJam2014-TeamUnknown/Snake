@@ -7,12 +7,14 @@ public class BossGM : MonoBehaviour {
 
 	public Text t;
 	public List<GameObject> SoldierPrefabs;
+	public List<GameObject> DefeatrPrefabs;
 	public GameObject Boss;
 
 	public int OffsetX;
 	public int Speed;
 	public Vector3 v;
 	public Vector3 SoldierInitPos;
+	public Vector3 DefeatPos;
 
 	public List<Image> Bloods;
 
@@ -24,7 +26,7 @@ public class BossGM : MonoBehaviour {
 	void Start () {
 		//Debug.Log(CommanData.CommonSnake.Count);
 		//Debug.Log((int)CommanData.CommonSnake[0]);
-		test = Instantiate(SoldierPrefabs[0], SoldierInitPos, Quaternion.identity) as GameObject;
+		test = Instantiate(SoldierPrefabs[6], SoldierInitPos, Quaternion.identity) as GameObject;
 		test.SetActive(true);
 		test.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
 		test.GetComponent<Animator>().SetTrigger("walk_right");
@@ -61,11 +63,15 @@ public class BossGM : MonoBehaviour {
 	{
 		tile.transform.position += v;
 
-		if (tile.transform.position.x >= Boss.transform.position.x + OffsetX)
+		if (tile.transform.position.x >= DefeatPos.x)
 		{
-			tile.GetComponent<Animator>().SetTrigger("defeat");
+			tile.SetActive(false);
+			GameObject.Destroy(tile);
+			GameObject newDefeat = Instantiate(DefeatrPrefabs[6], DefeatPos, Quaternion.identity) as GameObject;
+			newDefeat.SetActive(true);
+			newDefeat.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+			newDefeat.GetComponent<Animator>().SetTrigger("defeat");
 			Debug.Log("Dead");
-			test = null;
 		}
 	}
 }
