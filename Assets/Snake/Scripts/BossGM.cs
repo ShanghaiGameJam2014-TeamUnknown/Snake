@@ -23,6 +23,8 @@ public class BossGM : MonoBehaviour {
 
 	private GameObject runningTile;
 	private int currentIndex;
+
+	public AudioSource FlySound;
 	
 	// Use this for initialization
 	void Start () {
@@ -83,6 +85,7 @@ public class BossGM : MonoBehaviour {
 			newDefeat.GetComponent<Animator>().SetTrigger("defeat");
 			currentIndex++;
 			BossHP--;
+			FlySound.Play();
 		}
 	}
 }
